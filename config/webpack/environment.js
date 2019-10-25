@@ -1,5 +1,3 @@
-const { environment } = require('@rails/webpacker');
-const react = require('./loaders/react');
+const { environment } = require('@rails/webpacker')
 
-environment.loaders.append('react', react);
-module.exports = environment;
+module.exports = environment

@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  root 'pages#index'
-
-  namespace :api, defaults: { format: 'json' } do
-    resources :collections, only: %i[index create]
+  # other routes
+  get '*page', to: 'static#index', constraints: ->(req) do
+    !req.xhr? && req.format.html?
   end
-
-  match '*path', to: 'pages#index', via: :all
+  root 'static#index'
 end

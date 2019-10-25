@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+- Clone this repo
+- `bundle install`
+- `rails webpacker:install`
+- `rails webpacker:install:react`
+- `rails generate react:install`
+- `yarn install`
+- `rails generate rspec:install`
+- Fix solargraph setup in editor, set bin path to ~/.rvm/gems/ruby-2.6.5@rails6/bin/solargraph
+- Postgres master password: root
 
-* Ruby version
+## Start servers
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- `docker-compose up` will start postgres, user: postgres, pw: postgres
+- `rails db:create`
+- `rails db:migrate`
+- `./bin/webpack-dev-server`
+- `rails s`
