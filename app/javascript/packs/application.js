@@ -19,3 +19,6 @@ const componentRequireContext = require.context('components', true);
 const ReactRailsUJS = require('react_ujs');
 
 ReactRailsUJS.useContext(componentRequireContext);
+
+import '../stylesheets/application';
+import './bootstrap_custom.js'
