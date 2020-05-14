@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.2.1'
+gem 'rails', '~> 6.0.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -21,7 +21,6 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'jwt'
 gem 'http_accept_language'
 gem 'react-rails', '~> 2.6'
 
@@ -34,6 +33,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
 end
 
 group :development do
@@ -52,12 +52,10 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'capybara'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'launchy'
-  gem 'selenium-webdriver'
   gem 'show_me_the_cookies'
   gem 'simplecov', require: false
   gem 'shoulda-matchers'
