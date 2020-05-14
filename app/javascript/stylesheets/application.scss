@@ -17,3 +17,7 @@
 main {
   padding-top: 60px;
 }
+
+label.required:after {
+  content:" *";
+}

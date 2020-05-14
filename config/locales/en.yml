@@ -1,4 +1,19 @@
 en-US:
+  flash:
+    user:
+      session:
+        destroy:
+          success: 'Logout succesful'
+        create:
+          success: 'Login successful'
+          failure: 'Login not successful'
+  session:
+    login: 'Login'
+    new:
+      email_field_label: E-Mail
+      password_field_label: Password
+      forgot_password: 'Forgot password?'
+      remember_me: 'Remember me'
   date:
     abbr_day_names:
       - Sun
@@ -134,6 +149,8 @@ en-US:
         one: 1 error prohibited this %{model} from being saved
         other: '%{count} errors prohibited this %{model} from being saved'
   helpers:
+    login_link: Login
+    logout_link: Logout
     select:
       prompt: Please select
     submit:

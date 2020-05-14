@@ -1,4 +1,19 @@
 de:
+  flash:
+    user:
+      session:
+        destroy:
+          success: 'Logout erfolgreich'
+        create:
+          success: 'Login erfolgreich'
+          failure: 'Login nicht erfolgreich'
+  session:
+    login: 'Login'
+    new:
+      email_field_label: E-Mail
+      password_field_label: Passwort
+      forgot_password: 'Passwort vergessen?'
+      remember_me: 'Remember me'
   date:
     abbr_day_names:
       - So
@@ -135,6 +150,8 @@ de:
         one: 'Konnte %{model} nicht speichern: ein Fehler.'
         other: 'Konnte %{model} nicht speichern: %{count} Fehler.'
   helpers:
+    login_link: 'Login'
+    logout_link: 'Logout'
     select:
       prompt: Bitte wählen
     submit:
