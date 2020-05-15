@@ -17,5 +17,12 @@
 - `docker-compose up` will start postgres, user: postgres, pw: postgres
 - `rails db:create`
 - `rails db:migrate`
-- `./bin/webpack-dev-server`
+- (`./bin/webpack-dev-server`)
 - `rails s`
+
+## Assets/Webpacker setup
+- [webpacker-bootstrap-rails6](https://medium.com/@adrian_teh/ruby-on-rails-6-with-webpacker-and-bootstrap-step-by-step-guide-41b52ef4081f)
+- Test production mode:
+  - `$ rake secret`, copy output
+  - `$ SECRET_KEY_BASE=<output> RAILS_ENV=production RAILS_SERVE_STATIC_FILES=true NODE_ENV=production rake assets:precompile`
+  - `$ SECRET_KEY_BASE=<output> RAILS_ENV=production RAILS_SERVE_STATIC_FILES=true NODE_ENV=production rails s`

@@ -22,3 +22,7 @@ ReactRailsUJS.useContext(componentRequireContext);
 
 import '../stylesheets/application';
 import './bootstrap_custom.js'
+
+document.addEventListener('turbolinks:load', function () {
+  document.getElementById('primary-content').className += 'animate__animated animate__fadeIn animate__faster';
+});
