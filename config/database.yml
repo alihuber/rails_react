@@ -79,5 +79,5 @@ test:
 production:
   <<: *default
   database: react_base_app_production
-  username: example
+  username: postgres
   password: <%= ENV['EXAMPLE_DATABASE_PASSWORD'] %>
