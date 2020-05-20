@@ -21,7 +21,11 @@
       </div>
     </header>
     <main role="main" id="primary-content">
-      <%= yield %>
+      <div id="barba-wrapper">
+        <div class="barba-container">
+          <%= yield %>
+        </div>
+      </div>
     </main>
     <footer class="footer">
       <%= render "layouts/footer" %>
