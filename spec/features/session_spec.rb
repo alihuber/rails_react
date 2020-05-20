@@ -40,7 +40,7 @@ feature 'session handling' do
     fill_in 'session_create_session_login_password', with: 'wrong'
     click_button 'submit_login'
 
-    expect(page).to have_css '.alert-danger'
+    expect(page).to have_css '.alert-warning'
     expect(current_path).to eq login_path
   end
 
@@ -48,7 +48,7 @@ feature 'session handling' do
     login(user)
     expect(get_me_the_cookie('auth_token')[:value]).to eq user.auth_token
     expect(page).to have_css '.alert-success'
-    expect(current_path).to eq base_messages.user_dashboard_path
+    expect(current_path).to eq root_path
 
     click_link 'logout_link'
 
