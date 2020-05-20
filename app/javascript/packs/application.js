@@ -14,11 +14,12 @@ require('@rails/activestorage').start();
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-// Support component names relative to this directory:
-const componentRequireContext = require.context('components', true);
-const ReactRailsUJS = require('react_ujs');
 
-ReactRailsUJS.useContext(componentRequireContext);
+// Support component names relative to this directory:
+// const componentRequireContext = require.context('components', true);
+// const ReactRailsUJS = require('react_ujs');
+
+// ReactRailsUJS.useContext(componentRequireContext);
 
 import '../stylesheets/application';
 import './bootstrap_custom.js'
