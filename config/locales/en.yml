@@ -1,5 +1,7 @@
-en-US:
+en:
   flash:
+    authentication:
+      not_logged_in: 'You have to log in'
     user:
       session:
         destroy:

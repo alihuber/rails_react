@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails'
@@ -30,7 +32,7 @@ module RailsReactBaseApp
     # the framework and any gems in your application.
     config.time_zone = 'Berlin'
     config.i18n.load_path += Dir["#{Rails.root}/engines/base_mailer/config/locales/**/*.{rb,yml}"]
-    config.i18n.default_locale = :de
+    config.i18n.default_locale = :en
 
     # Don't generate system test files.
     config.generators.system_tests = nil

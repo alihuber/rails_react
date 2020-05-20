@@ -1,5 +1,7 @@
 de:
   flash:
+    authentication:
+      not_logged_in: 'Sie müssen sich einloggen'
     user:
       session:
         destroy:

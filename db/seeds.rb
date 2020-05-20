@@ -11,8 +11,8 @@
 puts 'Seeding Admin'
 
 User::AdminUser.create!(
-  email: 'test@admin.de',
-  password: 'admin123',
+  email: 'admin@example.com',
+  password: 'example',
   type: 'User::AdminUser',
   auth_token: SecureRandom.urlsafe_base64(24)
 )
@@ -20,8 +20,8 @@ User::AdminUser.create!(
 puts 'Seeding test user'
 
 User.create!(
-  email: 'foo@bar.com',
-  password: 'test123',
+  email: 'test@example.com',
+  password: 'example',
   type: 'User',
   auth_token: SecureRandom.urlsafe_base64(24)
 )

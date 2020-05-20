@@ -29,17 +29,20 @@ module AuthenticationConcern
     unless user_signed_in?
       session['redirect_url_after_login'] = request.original_url
 
-      flash.alert = t 'flash.user.authentication.not_logged_in'
+      flash.alert = t 'flash.authentication.not_logged_in'
       redirect_to login_path
     end
   end
 
   def login_admin
-    unless admin_signed_in?
+    if !admin_signed_in? && !user_signed_in?
       session['redirect_url_after_login'] = request.original_url
 
-      flash.alert = t 'flash.admin.authentication.not_logged_in'
+      flash.alert = t 'flash.authentication.not_logged_in'
       redirect_to login_path
+    elsif !admin_signed_in? && user_signed_in?
+      # TODO: user_dashboard_path
+      redirect_to root_path
     end
   end
 

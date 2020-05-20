@@ -2,12 +2,14 @@
 
 Rails.application.routes.draw do
   # other routes
-  # get '*page', to: 'static#index', constraints: ->(req) do
+  # get '*page', to: 'index#index', constraints: ->(req) do
   #   !req.xhr? && req.format.html?
   # end
-  root 'static#index'
+  root 'index#index'
 
   get    'login'  => 'session#new'
   post   'login'  => 'session#create'
   delete 'logout' => 'session#destroy'
+
+  get 'admin_dashboard' => 'admin#index'
 end
