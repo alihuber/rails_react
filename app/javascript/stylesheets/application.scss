@@ -22,3 +22,13 @@ main {
 label.required:after {
   content:" *";
 }
+
+.navbar-nav > li > a, .navbar-brand {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    height: 28px;
+}
+.navbar {
+  min-height: 28px !important;
+  padding: 0.4rem, 1rem !important;
+}

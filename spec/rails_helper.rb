@@ -1,20 +1,44 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
 SimpleCov.start 'rails' do
-  # add_group 'Interactions', ['path/to/classes']
+  add_group 'Interactions', ['app/interactions']
 end
 
 require File.expand_path('../config/environment', __dir__)
 
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require 'factory_bot'
+require 'capybara/rails'
+require 'capybara/rspec'
+
+Capybara.server_port = 31_337
+Capybara.default_max_wait_time = 10
+Capybara.register_driver :selenium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    # args: %w[headless disable-gpu no-sandbox]
+    args: %w[disable-gpu no-sandbox]
+  )
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :selenium
+# Capybara.register_driver :selenium_firefox do |app|
+#   Capybara::Selenium::Driver.new(app, browser: :firefox, marionette: true)
+# end
+# Capybara.javascript_driver     = :selenium_firefox
+# Capybara.default_max_wait_time = 10 # seconds
+# Capybara.raise_server_errors   = false
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -56,8 +80,10 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.include Capybara::DSL
   config.include FactoryBot::Syntax::Methods
   config.include ActionView::RecordIdentifier, type: :feature
+  config.include Features::SessionHelpers,     type: :feature
   config.include ShowMeTheCookies,             type: :feature
 
   config.before(:suite) do
@@ -70,7 +96,6 @@ RSpec.configure do |config|
       example.run
     end
   end
-
 
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)

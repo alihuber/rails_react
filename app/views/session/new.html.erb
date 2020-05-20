@@ -5,7 +5,7 @@
         <%= f.email_field :email, label: t('.email_field_label') %>
         <%= f.password_field :password, label: t('.password_field_label') %>
         <%# <%= link_to t(".forgot_password"), password_reset_path, id: "forgot_password_link" %>
-        <%= f.submit "Log In" %>
+        <%= f.submit "Log In", id: 'submit_login' %>
         <%= f.check_box :remember_me, label: t(".remember_me"), inline: true %>
       <% end %>
   </div>

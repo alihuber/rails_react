@@ -56,11 +56,13 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'show_me_the_cookies'
   gem 'simplecov', require: false
