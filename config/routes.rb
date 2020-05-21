@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'resque/server'
+
 Rails.application.routes.draw do
   # other routes
   # get '*page', to: 'index#index', constraints: ->(req) do
@@ -12,4 +14,6 @@ Rails.application.routes.draw do
   delete 'logout' => 'session#destroy'
 
   get 'admin_dashboard' => 'admin#index'
+
+  mount Resque::Server, at: '/jobs', constraints: AdminConstraint
 end

@@ -1,0 +1,3 @@
+CollectStatsJob:
+  cron: "* * * * *"
+  queue: default

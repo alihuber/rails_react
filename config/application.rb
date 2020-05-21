@@ -31,10 +31,15 @@ module RailsReactBaseApp
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.time_zone = 'Berlin'
-    config.i18n.load_path += Dir["#{Rails.root}/engines/base_mailer/config/locales/**/*.{rb,yml}"]
     config.i18n.default_locale = :en
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    # use resque as active_job adapter
+    config.active_job.queue_adapter = :resque
+
+    config.after_initialize do
+      # run one-off jobs jobs here, or jobs to run on every server start
+    end
   end
 end

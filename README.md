@@ -14,13 +14,20 @@
 
 ## Start servers
 
-- `docker-compose up` will start postgres, user: postgres, pw: postgres
+- `docker-compose up` will start postgres (user: postgres, pw: postgres) and redis
 - `rails db:create`
 - `rails db:migrate`
 - (`./bin/webpack-dev-server`)
 - `rails s`
 
+## Background workers
+
+- `VERBOSE=true QUEUE=* rake environment resque:work` starts resque worker process
+- `VERBOSE=true rake environment resque:scheduler` starts resque scheduler
+
+
 ## Assets/Webpacker setup
+
 - [webpacker-bootstrap-rails6](https://medium.com/@adrian_teh/ruby-on-rails-6-with-webpacker-and-bootstrap-step-by-step-guide-41b52ef4081f)
 - Test production mode:
   - `$ rake secret`, copy output
