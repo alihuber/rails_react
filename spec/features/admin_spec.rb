@@ -7,10 +7,10 @@ feature 'admin dashboard' do
   let!(:user2)      { create :user }
   let!(:admin_user) { create :admin_user }
 
-  scenario 'admin dashboard display for admin' do
+  scenario 'admin dashboard display for admin', js: true do
     login(admin_user)
     expect(page).to have_css '.alert-success'
-    expect(page).to have_text 'Hello Admin'
+    expect(page).to have_text 'Dashboard'
   end
 
   scenario 'admin dashboard display for non-admin' do

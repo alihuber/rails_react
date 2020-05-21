@@ -26,8 +26,8 @@ Capybara.server_port = 31_337
 Capybara.default_max_wait_time = 10
 Capybara.register_driver :selenium do |app|
   options = Selenium::WebDriver::Chrome::Options.new(
-    # args: %w[headless disable-gpu no-sandbox]
-    args: %w[disable-gpu no-sandbox]
+    args: %w[headless disable-gpu no-sandbox]
+    # args: %w[disable-gpu no-sandbox]
   )
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
