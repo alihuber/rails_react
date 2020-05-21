@@ -6,14 +6,14 @@
   <% else %>
     <%= link_to 'Home', root_path, class: 'navbar-brand'%>
   <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="sidebarMenu">
       <div class="navbar-nav mr-auto"></div>
       <ul class="navbar-nav">
         <% unless user_signed_in? %>
-          <li class="nav-item">
+          <li class="nav-item login_link" data-toggle="collapse" data-target="#sidebarMenu">
             <%= link_to 'Login', login_path, class: 'nav-link', id: 'login_link' %>
           </li>
         <% else %>

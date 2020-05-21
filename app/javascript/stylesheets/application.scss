@@ -1,5 +1,18 @@
 @import './bootstrap_custom.scss';
 
+.truncatedText {
+    // display: block;
+    // display: -webkit-box;
+    max-width: 150px;
+    max-height: 50px;
+    // margin: 0 auto;
+    line-height: 1.2;
+    // -webkit-line-clamp: 3;
+    // -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* bootstrap customsizations */
 .container-fluid {
   padding-right: 0px !important;
@@ -13,6 +26,7 @@
   height: 60px;
   line-height: 60px;
   background-color: #f5f5f5;
+  z-index: 200;
 }
 
 .loginrow {
@@ -43,9 +57,19 @@ label.required:after {
   top: 0;
   bottom: 0;
   left: 0;
-  // z-index: 100;
+  z-index: 100;
   padding: 48px 0 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+ @media only screen and (max-width: 600px) {
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 3rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
 .sidebar .nav-link.active {

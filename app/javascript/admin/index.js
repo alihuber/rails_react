@@ -4,6 +4,8 @@ import { config, library, dom } from '@fortawesome/fontawesome-svg-core';
 import {
   faChartLine,
   faUsers,
+  faEdit,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
 const myCustomContext = require.context('./admin_components', true);
@@ -15,7 +17,9 @@ config.mutateApproach = 'sync';
 
 library.add(
   faChartLine,
-  faUsers
+  faUsers,
+  faEdit,
+  faTrash,
 );
 
 dom.watch();

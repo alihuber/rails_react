@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -28,6 +30,16 @@ class User < ApplicationRecord
   class AdminUser < self
     def admin?
       true
+    end
+  end
+
+  def to_builder
+    Jbuilder.new do |user|
+      user.id id
+      user.type type
+      user.email email
+      user.createdAt created_at
+      user.updatedAt updated_at
     end
   end
 end

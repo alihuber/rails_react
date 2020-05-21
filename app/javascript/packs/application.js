@@ -77,4 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return linkClicked ? FadeTransition : HideShowTransition;
   };
+
+  if (window.innerWidth > 800) {
+    $('li.login_link').removeAttr('data-toggle');
+  }
 });

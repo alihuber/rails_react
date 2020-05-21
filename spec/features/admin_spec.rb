@@ -20,22 +20,17 @@ feature 'admin dashboard' do
     expect(page).not_to have_text 'Hello Admin'
   end
 
+  scenario 'display users', js: true do
+    login(admin_user)
+    expect(page).to have_css '.alert-success'
+    click_link('users_link')
+    expect(page).to have_text(user1.email)
+    expect(page).to have_text(user2.email)
+    expect(page).to have_text(admin_user.email)
+    expect(page).to have_text('X', count: 1)
+  end
+
   # TODO:
-  # scenario "display users", js: true do
-  #   login(admin_user)
-  #   expect(page).to have_css ".alert-success"
-  #   expect(page).to have_text(user1.email)
-  #   expect(page).to have_text(user2.email)
-  #   expect(page).to have_text(admin_user.email)
-  #   expect(page).to have_css(".glyphicon-check", count: 1)
-
-  #   click_button "editModeButton"
-  #   expect(page).to have_css(".glyphicon-remove", count: 2)
-  #   expect(page).to have_field("innerEmail", with: user1.email)
-  #   expect(page).to have_field("innerEmail", with: user2.email)
-  #   expect(page).to have_field("innerEmail", with: admin_user.email)
-  # end
-
   # scenario "udpate user", js: true do
   #   login(admin_user)
   #   expect(page).to have_css ".alert-success"
