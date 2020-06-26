@@ -19,6 +19,7 @@
 - `rails db:migrate`
 - (`./bin/webpack-dev-server`)
 - `rails s`
+- access from local network: `rails s -b 0.0.0.0`
 
 ## Background workers
 
