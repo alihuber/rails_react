@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DeleteUserModal from './DeleteUserModal';
+import DeleteSuccessToast from './DeleteSuccessToast';
+import DeleteErrorToast from './DeleteErrorToast';
 
-const mobileTable = (users) => (
+const mobileTable = (users, setShowDelete, setDeleteUserId) => (
   <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -22,9 +25,17 @@ const mobileTable = (users) => (
           <td className="truncatedText">{u.email}</td>
           <td>{u.type === 'User::AdminUser' ? 'X' : ''}</td>
           <td>
-            <Button size="sm" variant="primary"><FontAwesomeIcon icon="edit" /></Button>
+            <Button size="sm" variant="primary">
+              <FontAwesomeIcon icon="edit" />
+            </Button>
             {' '}
-            <Button size="sm" variant="danger"><FontAwesomeIcon icon="trash" /></Button>
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={() => { setDeleteUserId(u.id); setShowDelete(true); }}
+            >
+              <FontAwesomeIcon icon="trash" />
+            </Button>
           </td>
         </tr>
       ))}
@@ -32,7 +43,7 @@ const mobileTable = (users) => (
   </Table>
 );
 
-const fullTable = (users) => (
+const fullTable = (users, setShowDelete, setDeleteUserId) => (
   <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -53,9 +64,16 @@ const fullTable = (users) => (
           <td>{u.createdAt}</td>
           <td>{u.updatedAt}</td>
           <td>
-            <Button size="sm" variant="primary"><FontAwesomeIcon icon="edit" /></Button>
+            <Button size="sm" variant="primary">
+              <FontAwesomeIcon icon="edit" />
+            </Button>
             {' '}
-            <Button size="sm" variant="danger"><FontAwesomeIcon icon="trash" /></Button>
+            <Button
+              size="sm" variant="danger"
+              onClick={() => { setDeleteUserId(u.id); setShowDelete(true); }}
+            >
+              <FontAwesomeIcon icon="trash" />
+            </Button>
           </td>
         </tr>
       ))}
@@ -63,20 +81,45 @@ const fullTable = (users) => (
   </Table>
 );
 
-const UserTable = ({ users }) => {
+const UserTable = ({ usersInTable, setUsersInTable }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteUserId, setDeleteUserId] = useState(null);
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+  const [showDeleteError, setShowDeleteError] = useState(false);
+
   return (
     <>
       <Button variant="success">Add user</Button>
       <br />
       <br />
-      {isTabletOrMobile ? (mobileTable(users)) : (fullTable(users))}
+      {isTabletOrMobile ?
+        (mobileTable(usersInTable, setShowDelete, setDeleteUserId)) :
+        (fullTable(usersInTable, setShowDelete, setDeleteUserId))}
+      <DeleteUserModal
+        deleteUserId={deleteUserId}
+        showDelete={showDelete}
+        setShowDelete={setShowDelete}
+        setShowDeleteSuccess={setShowDeleteSuccess}
+        setShowDeleteError={setShowDeleteError}
+        setUsersInTable={setUsersInTable}
+        usersInTable={usersInTable}
+      />
+      <DeleteErrorToast
+        showDeleteError={showDeleteError}
+        setShowDeleteError={setShowDeleteError}
+      />
+      <DeleteSuccessToast
+        showDeleteSuccess={showDeleteSuccess}
+        setShowDeleteSuccess={setShowDeleteSuccess}
+      />
     </>
   );
 };
 
 UserTable.propTypes = {
-  users: PropTypes.array.isRequired,
+  usersInTable: PropTypes.array.isRequired,
+  setUsersInTable: PropTypes.func.isRequired,
 };
 
 export default UserTable;

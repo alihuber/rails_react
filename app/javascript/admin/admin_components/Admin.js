@@ -9,6 +9,7 @@ import UserTable from './UserTable';
 
 const Admin = ({ users }) => {
   const [selectedMenu, setSelectedMenu] = useState('Dashboard');
+  const [usersInTable, setUsersInTable] = useState(users);
 
   useEffect(() => {
     if (window.innerWidth > 800) {
@@ -51,7 +52,7 @@ const Admin = ({ users }) => {
             {' '}
             {selectedMenu}
           </h1>
-          {selectedMenu === 'Users' ? <UserTable users={users} /> : null}
+          {selectedMenu === 'Users' ? <UserTable usersInTable={usersInTable} setUsersInTable={setUsersInTable} /> : null}
         </div>
       </Row>
     </Container>

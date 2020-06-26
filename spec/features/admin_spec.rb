@@ -72,7 +72,7 @@ feature 'admin dashboard' do
 
   #   expect {
   #     click_button "createUserButton"
-  #   }.to change { BaseAuth::User.count }.by(1)
+  #   }.to change { User.count }.by(1)
 
   #   expect(page).to have_css ".alert-success"
   #   expect(page).to have_text(new_email)

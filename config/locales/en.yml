@@ -5,7 +5,7 @@ en:
     user:
       session:
         destroy:
-          success: 'Logout succesful'
+          success: 'Logout successful'
         create:
           success: 'Login successful'
           failure: 'Login not successful'
