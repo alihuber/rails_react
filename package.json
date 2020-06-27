@@ -22,6 +22,7 @@
     "react-dom": "^16.13.1",
     "react-responsive": "^8.1.0",
     "react_ujs": "^2.6.1",
+    "simpl-schema": "^1.8.0",
     "turbolinks": "^5.2.0",
     "uniforms": "^2.6.9",
     "uniforms-bootstrap4": "^2.6.9",

@@ -2,7 +2,7 @@
 
 class AdminController < ApplicationController
   before_action :login_admin
-  protect_from_forgery except: [:destroy]
+  protect_from_forgery except: %i[destroy create]
 
   def index
     users = Users::ListUsers.run!
@@ -10,9 +10,19 @@ class AdminController < ApplicationController
   end
 
   def create
-    outcome = Users::CreateUser.run(params[:user])
+    outcome = Users::CreateUser.run(
+      email: params[:email],
+      password: params[:password],
+      admin: params[:admin] || false
+    )
     if outcome.valid?
-      render json: { success: true }, status: 200
+      new_user = outcome.result
+      render json: { user:
+        { id: new_user.id,
+          type: new_user.type,
+          email: new_user.email,
+          createdAt: new_user.created_at,
+          updatedAt: new_user.updated_at } }, status: 200
     else
       render json: { error: outcome.errors }, status: 422
     end

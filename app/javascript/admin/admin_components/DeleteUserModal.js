@@ -8,8 +8,8 @@ const DeleteUserModal = ({
   deleteUserId,
   showDelete,
   setShowDelete,
-  setShowDeleteSuccess,
-  setShowDeleteError,
+  setShowSuccess,
+  setShowError,
   setUsersInTable,
   usersInTable,
 }) => {
@@ -44,17 +44,17 @@ const DeleteUserModal = ({
               headers: {
                 'Content-Type': 'application/json',
               },
-              redirect: 'follow',
+              redirect: 'error',
               referrerPolicy: 'same-origin',
             });
             if (response.status === 200) {
               setShowDelete(false);
-              setShowDeleteSuccess(true);
+              setShowSuccess(true);
               const newUsers = reject(usersInTable, (u) => u.id === deleteUserId);
               setUsersInTable(newUsers);
             } else {
               setShowDelete(false);
-              setShowDeleteError(true);
+              setShowError(true);
             }
           }}
         >
@@ -69,8 +69,8 @@ DeleteUserModal.propTypes = {
   deleteUserId: PropTypes.number,
   showDelete: PropTypes.bool.isRequired,
   setShowDelete: PropTypes.func.isRequired,
-  setShowDeleteSuccess: PropTypes.func.isRequired,
-  setShowDeleteError: PropTypes.func.isRequired,
+  setShowSuccess: PropTypes.func.isRequired,
+  setShowError: PropTypes.func.isRequired,
   setUsersInTable: PropTypes.func.isRequired,
   usersInTable: PropTypes.array.isRequired,
 };

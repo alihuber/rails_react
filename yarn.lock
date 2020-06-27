@@ -8588,7 +8588,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-"simpl-schema@^1.0.0 || ^0.0.4":
+"simpl-schema@^1.0.0 || ^0.0.4", simpl-schema@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/simpl-schema/-/simpl-schema-1.8.0.tgz#e70538095ab58c3fc42a85552f0ef61fe6a58aae"
   integrity sha512-tLordukEBDHDGzwkDcAXkSLxcjePRhPThf3HXWPsmrXGZaMOk2dRDhyJHYFSbUUIKG0h81SOf3cL9u9Yy0zZkA==

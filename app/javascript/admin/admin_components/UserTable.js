@@ -5,8 +5,9 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteUserModal from './DeleteUserModal';
-import DeleteSuccessToast from './DeleteSuccessToast';
-import DeleteErrorToast from './DeleteErrorToast';
+import CreateUserModal from './CreateUserModal';
+import SuccessToast from './SuccessToast';
+import ErrorToast from './ErrorToast';
 
 const mobileTable = (users, setShowDelete, setDeleteUserId) => (
   <Table striped bordered hover size="sm">
@@ -84,13 +85,14 @@ const fullTable = (users, setShowDelete, setDeleteUserId) => (
 const UserTable = ({ usersInTable, setUsersInTable }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
   const [showDelete, setShowDelete] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
   const [deleteUserId, setDeleteUserId] = useState(null);
-  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
-  const [showDeleteError, setShowDeleteError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   return (
     <>
-      <Button variant="success">Add user</Button>
+      <Button variant="success" onClick={() => setShowCreate(true)}>Add user</Button>
       <br />
       <br />
       {isTabletOrMobile ?
@@ -100,18 +102,26 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
         deleteUserId={deleteUserId}
         showDelete={showDelete}
         setShowDelete={setShowDelete}
-        setShowDeleteSuccess={setShowDeleteSuccess}
-        setShowDeleteError={setShowDeleteError}
+        setShowSuccess={setShowSuccess}
+        setShowError={setShowError}
         setUsersInTable={setUsersInTable}
         usersInTable={usersInTable}
       />
-      <DeleteErrorToast
-        showDeleteError={showDeleteError}
-        setShowDeleteError={setShowDeleteError}
+      <CreateUserModal
+        showCreate={showCreate}
+        setShowCreate={setShowCreate}
+        setShowSuccess={setShowSuccess}
+        setShowError={setShowError}
+        setUsersInTable={setUsersInTable}
+        usersInTable={usersInTable}
       />
-      <DeleteSuccessToast
-        showDeleteSuccess={showDeleteSuccess}
-        setShowDeleteSuccess={setShowDeleteSuccess}
+      <ErrorToast
+        showError={showError}
+        setShowError={setShowError}
+      />
+      <SuccessToast
+        showSuccess={showSuccess}
+        setShowSuccess={setShowSuccess}
       />
     </>
   );
