@@ -6,10 +6,11 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteUserModal from './DeleteUserModal';
 import CreateUserModal from './CreateUserModal';
+import UpdateUserModal from './UpdateUserModal';
 import SuccessToast from './SuccessToast';
 import ErrorToast from './ErrorToast';
 
-const mobileTable = (users, setShowDelete, setDeleteUserId) => (
+const mobileTable = (users, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser) => (
   <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -26,7 +27,11 @@ const mobileTable = (users, setShowDelete, setDeleteUserId) => (
           <td className="truncatedText">{u.email}</td>
           <td>{u.type === 'User::AdminUser' ? 'X' : ''}</td>
           <td>
-            <Button size="sm" variant="primary">
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => { setUpdateUser(u); setShowUpdate(true); }}
+            >
               <FontAwesomeIcon icon="edit" />
             </Button>
             {' '}
@@ -44,7 +49,7 @@ const mobileTable = (users, setShowDelete, setDeleteUserId) => (
   </Table>
 );
 
-const fullTable = (users, setShowDelete, setDeleteUserId) => (
+const fullTable = (users, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser) => (
   <Table striped bordered hover size="sm">
     <thead>
       <tr>
@@ -65,7 +70,11 @@ const fullTable = (users, setShowDelete, setDeleteUserId) => (
           <td>{u.createdAt}</td>
           <td>{u.updatedAt}</td>
           <td>
-            <Button size="sm" variant="primary">
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => { setUpdateUser(u); setShowUpdate(true); }}
+            >
               <FontAwesomeIcon icon="edit" />
             </Button>
             {' '}
@@ -86,7 +95,9 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
   const [showDelete, setShowDelete] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
   const [deleteUserId, setDeleteUserId] = useState(null);
+  const [updateUser, setUpdateUser] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
 
@@ -96,12 +107,21 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
       <br />
       <br />
       {isTabletOrMobile ?
-        (mobileTable(usersInTable, setShowDelete, setDeleteUserId)) :
-        (fullTable(usersInTable, setShowDelete, setDeleteUserId))}
+        (mobileTable(usersInTable, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser)) :
+        (fullTable(usersInTable, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser))}
       <DeleteUserModal
         deleteUserId={deleteUserId}
         showDelete={showDelete}
         setShowDelete={setShowDelete}
+        setShowSuccess={setShowSuccess}
+        setShowError={setShowError}
+        setUsersInTable={setUsersInTable}
+        usersInTable={usersInTable}
+      />
+      <UpdateUserModal
+        updateUser={updateUser}
+        showUpdate={showUpdate}
+        setShowUpdate={setShowUpdate}
         setShowSuccess={setShowSuccess}
         setShowError={setShowError}
         setUsersInTable={setUsersInTable}

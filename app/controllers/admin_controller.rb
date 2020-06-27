@@ -2,11 +2,31 @@
 
 class AdminController < ApplicationController
   before_action :login_admin
-  protect_from_forgery except: %i[destroy create]
+  protect_from_forgery except: %i[destroy create update]
 
   def index
     users = Users::ListUsers.run!
     @users = users.map { |u| JSON.parse(u.to_builder.target!) }
+  end
+
+  def update
+    user = Users::FindUser.run(params)
+    return head 404 unless user.valid?
+
+    inputs = { user: user.result }
+             .reverse_merge(email: params[:email], password: params[:password] || '')
+    outcome = Users::AdminUpdateUser.run(inputs)
+    if outcome.valid?
+      user = outcome.result if outcome.valid?
+      render json: { user:
+        { id: user.id,
+          type: user.type,
+          email: user.email,
+          createdAt: user.created_at,
+          updatedAt: user.updated_at } }, status: 200
+    else
+      render json: { error: outcome.errors }, status: 422
+    end
   end
 
   def create

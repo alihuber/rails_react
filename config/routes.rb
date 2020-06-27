@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'admin_dashboard' => 'admin#index'
   post 'users',         to: 'admin#create',  defaults: { format: 'json' }
+  put 'user/id/:id',    to: 'admin#update',  defaults: { format: 'json' }
   delete 'user/id/:id', to: 'admin#destroy', defaults: { format: 'json' }
 
   mount Resque::Server, at: '/jobs', constraints: AdminConstraint
