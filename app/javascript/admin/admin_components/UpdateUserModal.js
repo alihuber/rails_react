@@ -13,7 +13,7 @@ const updateUserSchema = new SimpleSchema({
   password: {
     type: String,
     optional: true,
-    min: 8,
+    min: 6,
     uniforms: {
       type: 'password',
     },

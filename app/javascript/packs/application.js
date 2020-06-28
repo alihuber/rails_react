@@ -36,7 +36,6 @@ function initAll(conatainerElement) {
   // initialize all js scripts inside conatainerElement
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => initAll(document));
   Barba.Pjax.start();

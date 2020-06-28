@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   #   !req.xhr? && req.format.html?
   # end
   root 'index#index'
+  get 'user_dashboard' => 'index#user_dashboard'
+
+  get 'settings' => 'settings#index'
 
   get    'login'  => 'session#new'
   post   'login'  => 'session#create'

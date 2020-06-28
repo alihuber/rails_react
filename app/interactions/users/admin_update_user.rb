@@ -5,7 +5,7 @@ module Users
     object :user,  class: User
     string :email, :password
 
-    validates :password, length: { minimum: 8 }, allow_blank: true
+    validates :password, length: { minimum: 6 }, allow_blank: true
 
     def execute
       user.email = email if email? && !email.blank?

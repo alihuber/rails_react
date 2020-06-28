@@ -12,7 +12,7 @@ const createUserSchema = new SimpleSchema({
   },
   password: {
     type: String,
-    min: 8,
+    min: 6,
     uniforms: {
       type: 'password',
     },

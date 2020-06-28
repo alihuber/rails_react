@@ -25,6 +25,9 @@
           <%= yield %>
         </div>
       </div>
+      <% if user_signed_in? && !admin_signed_in? %>
+        <%= yield :sidebar %>
+      <% end %>
     </main>
     <footer class="footer">
       <%= render "layouts/footer" %>

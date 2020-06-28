@@ -9,6 +9,11 @@ const ErrorToast = ({ showError, setShowError }) => {
       show={showError}
       delay={3000}
       autohide
+      style={{
+        position: 'absolute',
+        top: 20,
+        right: 50,
+      }}
     >
       <Toast.Header>
         Message
