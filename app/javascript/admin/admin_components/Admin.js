@@ -53,9 +53,13 @@ const Admin = () => {
             <Nav.Item>
               <Nav.Link
                 id="dashboard_link"
-                data-toggle="collapse"
                 data-target="#sidebarMenu"
-                onSelect={(eventKey) => setSelectedMenu(eventKey)}
+                onSelect={(eventKey) => {
+                  setSelectedMenu(eventKey);
+                  if (window.innerWidth <= 800) {
+                    $('.navbar-toggler').click();
+                  }
+                }}
                 active={selectedMenu === 'Dashboard'}
                 eventKey="Dashboard"
               >
@@ -67,9 +71,13 @@ const Admin = () => {
             <Nav.Item>
               <Nav.Link
                 id="users_link"
-                data-toggle="collapse"
                 data-target="#sidebarMenu"
-                onSelect={(eventKey) => setSelectedMenu(eventKey)}
+                onSelect={(eventKey) => {
+                  setSelectedMenu(eventKey);
+                  if (window.innerWidth <= 800) {
+                    $('.navbar-toggler').click();
+                  }
+                }}
                 active={selectedMenu === 'Users'}
                 eventKey="Users"
               >

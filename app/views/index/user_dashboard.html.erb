@@ -22,13 +22,20 @@
   document.addEventListener('DOMContentLoaded', () => {
     elem1 = document.getElementById('dashboard_link');
     elem2 = document.getElementById('settings_link');
+    toggler = document.getElementsByClassName('navbar-toggler')[0];
     elem1.onclick = function() {
       elem1.className = 'nav-link active';
       elem2.className = 'nav-link';
+      if (window.innerWidth <= 800) {
+        toggler.click();
+      }
     }
     elem2.onclick = function() {
       elem2.className = 'nav-link active';
       elem1.className = 'nav-link';
+      if (window.innerWidth <= 800) {
+        toggler.click();
+      }
     }
   });
 </script>
