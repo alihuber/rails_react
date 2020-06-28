@@ -2,7 +2,6 @@
 
 class AdminController < ApplicationController
   before_action :login_admin
-  protect_from_forgery except: %i[destroy create update]
 
   def index; end
 

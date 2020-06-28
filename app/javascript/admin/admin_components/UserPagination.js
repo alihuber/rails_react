@@ -8,7 +8,7 @@ const UserPagination = ({ allUserCount, pageNum, setPageNum }) => {
   for (let number = 0; number < numPages; number += 1) {
     items.push(
       <Pagination.Item key={number} active={number === pageNum} onClick={() => setPageNum(number)}>
-        {number}
+        {number + 1}
       </Pagination.Item>
     );
   }

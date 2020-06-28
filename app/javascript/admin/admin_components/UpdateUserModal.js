@@ -51,6 +51,8 @@ const UpdateUserModal = ({
             model={model}
             onSubmit={async (doc) => {
               formRef.reset();
+              const token =
+                document.querySelector('[name=csrf-token]').content;
               const response = await fetch(`/user/id/${updateUser.id}`, {
                 method: 'PUT',
                 mode: 'same-origin',
@@ -58,6 +60,7 @@ const UpdateUserModal = ({
                 credentials: 'same-origin',
                 headers: {
                   'Content-Type': 'application/json',
+                  'X-CSRF-TOKEN': token,
                 },
                 redirect: 'error',
                 referrerPolicy: 'same-origin',

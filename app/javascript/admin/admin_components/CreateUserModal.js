@@ -45,6 +45,8 @@ const CreateUserModal = ({
           schema={bridge}
           onSubmit={async (doc) => {
             formRef.reset();
+            const token =
+              document.querySelector('[name=csrf-token]').content;
             const response = await fetch('/users', {
               method: 'POST',
               mode: 'same-origin',
@@ -52,6 +54,7 @@ const CreateUserModal = ({
               credentials: 'same-origin',
               headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token,
               },
               redirect: 'error',
               referrerPolicy: 'same-origin',

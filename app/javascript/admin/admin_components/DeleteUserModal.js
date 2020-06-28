@@ -38,6 +38,8 @@ const DeleteUserModal = ({
         <Button
           variant="primary"
           onClick={async () => {
+            const token =
+              document.querySelector('[name=csrf-token]').content;
             const response = await fetch(`/user/id/${deleteUserId}`, {
               method: 'DELETE',
               mode: 'same-origin',
@@ -45,6 +47,7 @@ const DeleteUserModal = ({
               credentials: 'same-origin',
               headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token,
               },
               redirect: 'error',
               referrerPolicy: 'same-origin',
