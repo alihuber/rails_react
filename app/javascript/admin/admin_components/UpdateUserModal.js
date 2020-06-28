@@ -97,6 +97,7 @@ UpdateUserModal.propTypes = {
   setShowError: PropTypes.func.isRequired,
   setUsersInTable: PropTypes.func.isRequired,
   usersInTable: PropTypes.array.isRequired,
+  setPageNum: PropTypes.func.isRequired,
 };
 
 export default UpdateUserModal;

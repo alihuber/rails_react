@@ -9,6 +9,7 @@ import CreateUserModal from './CreateUserModal';
 import UpdateUserModal from './UpdateUserModal';
 import SuccessToast from './SuccessToast';
 import ErrorToast from './ErrorToast';
+import UserPagination from './UserPagination';
 
 const mobileTable = (users, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser) => (
   <Table striped bordered hover size="sm">
@@ -91,7 +92,7 @@ const fullTable = (users, setShowDelete, setDeleteUserId, setShowUpdate, setUpda
   </Table>
 );
 
-const UserTable = ({ usersInTable, setUsersInTable }) => {
+const UserTable = ({ allUsersLength, pageNum, setPageNum, usersInTable, setUsersInTable, setUsersLength }) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
   const [showDelete, setShowDelete] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
@@ -109,6 +110,7 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
       {isTabletOrMobile ?
         (mobileTable(usersInTable, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser)) :
         (fullTable(usersInTable, setShowDelete, setDeleteUserId, setShowUpdate, setUpdateUser))}
+      <UserPagination setPageNum={setPageNum} pageNum={pageNum} allUserCount={allUsersLength} />
       <DeleteUserModal
         deleteUserId={deleteUserId}
         showDelete={showDelete}
@@ -116,7 +118,9 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
         setShowSuccess={setShowSuccess}
         setShowError={setShowError}
         setUsersInTable={setUsersInTable}
+        setUsersLength={setUsersLength}
         usersInTable={usersInTable}
+        setPageNum={setPageNum}
       />
       <UpdateUserModal
         updateUser={updateUser}
@@ -132,8 +136,8 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
         setShowCreate={setShowCreate}
         setShowSuccess={setShowSuccess}
         setShowError={setShowError}
-        setUsersInTable={setUsersInTable}
-        usersInTable={usersInTable}
+        setPageNum={setPageNum}
+        setUsersLength={setUsersLength}
       />
       <ErrorToast
         showError={showError}
@@ -148,8 +152,12 @@ const UserTable = ({ usersInTable, setUsersInTable }) => {
 };
 
 UserTable.propTypes = {
+  allUsersLength: PropTypes.number.isRequired,
+  pageNum: PropTypes.number.isRequired,
+  setPageNum: PropTypes.func.isRequired,
   usersInTable: PropTypes.array.isRequired,
   setUsersInTable: PropTypes.func.isRequired,
+  setUsersLength: PropTypes.func.isRequired,
 };
 
 export default UserTable;

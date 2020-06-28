@@ -4,9 +4,12 @@ class AdminController < ApplicationController
   before_action :login_admin
   protect_from_forgery except: %i[destroy create update]
 
-  def index
+  def index; end
+
+  def list
     users = Users::ListUsers.run!
-    @users = users.map { |u| JSON.parse(u.to_builder.target!) }
+    usersjson = users.map { |u| JSON.parse(u.to_builder.target!) }
+    render json: { users: usersjson }, status: 200
   end
 
   def update

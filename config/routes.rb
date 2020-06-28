@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'session#destroy'
 
   get 'admin_dashboard' => 'admin#index'
-  post 'users',         to: 'admin#create',  defaults: { format: 'json' }
+  get 'users',          to: 'admin#list', defaults: { format: 'json' }
+  post 'users',         to: 'admin#create'
   put 'user/id/:id',    to: 'admin#update',  defaults: { format: 'json' }
   delete 'user/id/:id', to: 'admin#destroy', defaults: { format: 'json' }
 

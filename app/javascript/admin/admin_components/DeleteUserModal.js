@@ -12,6 +12,8 @@ const DeleteUserModal = ({
   setShowError,
   setUsersInTable,
   usersInTable,
+  setPageNum,
+  setUsersLength,
 }) => {
   return (
     <Modal
@@ -52,6 +54,8 @@ const DeleteUserModal = ({
               setShowSuccess(true);
               const newUsers = reject(usersInTable, (u) => u.id === deleteUserId);
               setUsersInTable(newUsers);
+              setPageNum(0);
+              setUsersLength(newUsers.length);
             } else {
               setShowDelete(false);
               setShowError(true);
@@ -73,6 +77,8 @@ DeleteUserModal.propTypes = {
   setShowError: PropTypes.func.isRequired,
   setUsersInTable: PropTypes.func.isRequired,
   usersInTable: PropTypes.array.isRequired,
+  setUsersLength: PropTypes.func.isRequired,
+  setPageNum: PropTypes.func.isRequired,
 };
 
 export default DeleteUserModal;

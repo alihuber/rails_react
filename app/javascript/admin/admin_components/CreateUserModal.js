@@ -26,8 +26,8 @@ const CreateUserModal = ({
   setShowCreate,
   setShowSuccess,
   setShowError,
-  setUsersInTable,
-  usersInTable,
+  setPageNum,
+  setUsersLength,
 }) => {
   let formRef = useRef(null);
   return (
@@ -60,9 +60,8 @@ const CreateUserModal = ({
             if (response.status === 200) {
               setShowCreate(false);
               setShowSuccess(true);
-              const body = await response.json();
-              usersInTable.push(body.user);
-              setUsersInTable(usersInTable);
+              setPageNum(0);
+              setUsersLength();
             } else {
               setShowCreate(false);
               setShowError(true);
@@ -79,8 +78,8 @@ CreateUserModal.propTypes = {
   setShowCreate: PropTypes.func.isRequired,
   setShowSuccess: PropTypes.func.isRequired,
   setShowError: PropTypes.func.isRequired,
-  setUsersInTable: PropTypes.func.isRequired,
-  usersInTable: PropTypes.array.isRequired,
+  setPageNum: PropTypes.func.isRequired,
+  setUsersLength: PropTypes.func.isRequired,
 };
 
 export default CreateUserModal;

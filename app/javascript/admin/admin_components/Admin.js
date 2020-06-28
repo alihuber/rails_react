@@ -1,22 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import slice from 'lodash/slice';
 
 import UserTable from './UserTable';
 
-const Admin = ({ users }) => {
+const Admin = () => {
   const [selectedMenu, setSelectedMenu] = useState('Dashboard');
-  const [usersInTable, setUsersInTable] = useState(users);
+  const [usersInTable, setUsersInTable] = useState([]);
+  const [pageNum, setPageNum] = useState(0);
+  const [usersLength, setUsersLength] = useState(0);
 
   useEffect(() => {
     if (window.innerWidth > 800) {
       $('a#dashboard_link').removeAttr('data-toggle');
       $('a#users_link').removeAttr('data-toggle');
     }
-  }, []);
+    const perPage = 10;
+    const start = pageNum * perPage;
+    const end = start + perPage;
+    let users = [];
+    async function fetchData() {
+      const response = await fetch('/users', {
+        method: 'GET',
+        mode: 'same-origin',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'error',
+        referrerPolicy: 'same-origin',
+      });
+      if (response.status === 200) {
+        const body = await response.json();
+        users = body.users;
+        setUsersLength(users.length);
+        const newUsers = slice(users, start, end);
+        setUsersInTable(newUsers);
+      }
+    }
+    fetchData();
+  }, [pageNum, usersLength]);
 
   return (
     <Container fluid>
@@ -26,7 +53,10 @@ const Admin = ({ users }) => {
             <Nav.Item>
               <Nav.Link
                 id="dashboard_link"
-                data-toggle="collapse" data-target="#sidebarMenu" onSelect={(eventKey) => setSelectedMenu(eventKey)} active={selectedMenu === 'Dashboard'}
+                data-toggle="collapse"
+                data-target="#sidebarMenu"
+                onSelect={(eventKey) => setSelectedMenu(eventKey)}
+                active={selectedMenu === 'Dashboard'}
                 eventKey="Dashboard"
               >
                 <FontAwesomeIcon icon="chart-line" />
@@ -37,7 +67,10 @@ const Admin = ({ users }) => {
             <Nav.Item>
               <Nav.Link
                 id="users_link"
-                data-toggle="collapse" data-target="#sidebarMenu" onSelect={(eventKey) => setSelectedMenu(eventKey)} active={selectedMenu === 'Users'}
+                data-toggle="collapse"
+                data-target="#sidebarMenu"
+                onSelect={(eventKey) => setSelectedMenu(eventKey)}
+                active={selectedMenu === 'Users'}
                 eventKey="Users"
               >
                 <FontAwesomeIcon icon="users" />
@@ -52,15 +85,20 @@ const Admin = ({ users }) => {
             {' '}
             {selectedMenu}
           </h1>
-          {selectedMenu === 'Users' ? <UserTable usersInTable={usersInTable} setUsersInTable={setUsersInTable} /> : null}
+          {selectedMenu === 'Users' ? (
+            <UserTable
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              allUsersLength={usersLength}
+              usersInTable={usersInTable}
+              setUsersInTable={setUsersInTable}
+              setUsersLength={setUsersLength}
+            />
+          ) : null}
         </div>
       </Row>
     </Container>
   );
-};
-
-Admin.propTypes = {
-  users: PropTypes.array.isRequired,
 };
 
 export default Admin;
